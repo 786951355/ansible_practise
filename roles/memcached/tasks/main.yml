@@ -1,0 +1,8 @@
+---
+
+- name: install libevent
+  yum: name=libevent state=present
+
+- name: install memcached
+  yum: name=memcached state=present
+

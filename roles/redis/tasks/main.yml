@@ -1,0 +1,21 @@
+---
+
+- name: download redis.tar.gz 
+  get_url: url=http://download.redis.io/releases/redis-3.0.7.tar.gz  dest=/tmp/redis.tar.gz
+
+- name: copy redis install script
+  copy: src=redis_install.sh dest=/tmp/redis_install.sh
+
+- name: install redis
+  shell: /bin/sh /tmp/redis_install.sh
+
+- name: copy redis to /etc/init.d/
+  copy: src=redis dest=/etc/init.d/
+
+- name: write redis config file
+  template: src=redis.j2 dest=/usr/local/redis/redis.conf
+  nofity:
+    - restart redis
+
+- name: set start up on boot
+  service: name=redis enabled=yes

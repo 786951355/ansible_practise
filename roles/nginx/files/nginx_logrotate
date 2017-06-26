@@ -1,0 +1,12 @@
+/usr/local/nginx/logs/*.log {
+daily
+rotate 3 
+missingok
+notifempty
+sharedscripts
+postrotate
+    if [ -f /usr/local/nginx/logs/nginx.pid ]; then
+        kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+    fi
+endscript
+}

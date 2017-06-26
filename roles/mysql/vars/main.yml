@@ -1,0 +1,4 @@
+---
+
+mysql_data_dir: /home/data/mysql/data
+mysql_log_dir: /home/data/mysql/logs/binlog

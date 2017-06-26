@@ -1,0 +1,17 @@
+---
+
+- name: download tomcat
+  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+
+- name: Extract archive
+  command: chdir=/usr/local /bin/tar xf /opt/apache-tomcat-7.0.61.tar.gz -C /usr/local
+
+- name: Symlink tomcat
+  file: src=/usr/local/apache-tomcat-7.0.61 path=/usr/local/tomcat state=link
+
+- name: install tomcat init script
+  copy: src=tomcat.sh dest=/etc/init.d/tomcat mode=0755
+
+- name: start tomcat
+  service: name=tomcat state=started enabled=yes
+

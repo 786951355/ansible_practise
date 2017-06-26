@@ -1,0 +1,4 @@
+---
+
+- name: install httpd
+  scprit: roles/httpd/files/httpd_install.sh

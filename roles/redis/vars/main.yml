@@ -1,0 +1,11 @@
+redis_pid=/var/run/redis.pid
+redis_port=6379
+bind_ip=127.0.0.1
+
+redis_pass=redis123
+
+redis_log=/var/log/redis/redis.log
+
+redis_dir=/app/redis
+
+

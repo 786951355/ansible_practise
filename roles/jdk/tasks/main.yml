@@ -1,0 +1,9 @@
+---
+- name: cp jdk to remote
+  copy: src=jdk1.6.tar.gz dest=/tmp/
+
+- name: extract archive
+  command: chdir=/usr/bin/ /bin/tar xf /tmp/jdk1.6.tar.gz
+
+- name: set java env
+  copy: src=java.sh dest=/etc/profile.d/

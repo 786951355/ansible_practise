@@ -1,0 +1,32 @@
+---
+
+- name: add mysql-yum-repo
+  yum: name=https://dev.mysql.com/get/mysql57-community-release-el6-11.noarch.rpm
+
+- name: install mysql-server
+  yum: name=mysql-server
+
+- name: copy my.cnf
+  copy: src=my.cnf dest=/etc/my.cnf
+
+- name: mkdir datadir
+  file: 
+    path: {{ mysql_data_dir }}
+    state: directory
+    recurse: yes
+    owner: mysql
+    group: mysql
+  
+- name: mkdir binlog
+  file: 
+    path: {{ mysql_log_dir }}
+    state: directory
+    recurse: yes
+    owner: mysql
+    group: mysql
+
+- name: restart mysql
+  service: name=mysqld state=restarted enabled=yes
+
+- name: grep tmp password 
+  script: roles/mysql/files/tmp_pass.sh

@@ -1,0 +1,40 @@
+---
+
+- name: install dep packages
+  yum: name=gcc state=installed
+
+- name: install dep packages
+  yum: name=openssl-devel state=installed
+
+- name: install dep packages
+  yum: name=pcre state=installed
+
+- name: install dep packages
+  yum: name=pcre-devel state=installed
+
+- name: install dep packages
+  yum: name=zlib-devel state=installed
+
+- name: install dep packages
+  yum: name=gd state=installed
+
+- name: install dep packages
+  yum: name=gd-devel state=installed
+
+- name: copy nginx.tar.gz file to remote
+  copy: src=nginx-{{ngversion}}.tar.gz dest=/tmp/nginx.tar.gz
+
+- name: copy nginx install file
+  copy: src=nginx_install.sh dest=/tmp
+
+- name: install nginx
+  shell: /bin/sh /tmp/nginx_install.sh
+
+- name: copy file to /etc/init.d
+  copy: src=nginx dest=/etc/init.d/nginx
+
+- name: copy split log file
+  copy: src=nginx_logrotate dest=/etc/logrotate.d/nginx
+
+- name: add chkconfig
+  service: name=nginx enabled=yes
